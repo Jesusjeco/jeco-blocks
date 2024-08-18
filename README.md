@@ -32,3 +32,7 @@ Click Save Changes to apply the settings.
 
 ## Usage
 Once configured, the plugin will automatically update your .htaccess file with the IP blacklist at the specified time each day.
+
+## Acknowledgments
+
+The IP blacklist update script used in this plugin is provided by MyIP.ms. You can find more information about their services at [MyIP.ms](https://myip.ms/).

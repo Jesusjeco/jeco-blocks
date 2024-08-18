@@ -110,7 +110,12 @@ if (!class_exists('JECO_IPBL')) {
                 return;
             }
 
-            // Include the script responsible for updating the .htaccess file
+            /**
+             * Includes the IP blacklist update script, responsible for updating the .htaccess file
+             *
+             * This script is provided by MyIP.ms. For more information, visit:
+             * https://myip.ms/
+             */
             require_once(plugin_dir_path(__FILE__) . 'phpscript_httaccess_wordpress.php');
         }
 
