@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Jeco Auto IP Blacklist
+Plugin Name: Jeco IP Blacklist
 Description: Automatically updates .htaccess with the latest IP blacklist to block spam bots.
 Version: 1.0
 Author: Jesus Carrero
@@ -16,7 +16,7 @@ if (!class_exists('JECO_IPBL')) {
     /**
      * Class JECO_IPBL
      *
-     * This class handles the functionality of the Jeco Auto IP Blacklist plugin.
+     * This class handles the functionality of the Jeco IP Blacklist plugin.
      */
     class JECO_IPBL
     {
@@ -127,7 +127,7 @@ if (!class_exists('JECO_IPBL')) {
 
             // Add the plugin settings page to the WordPress admin menu
             add_menu_page(
-                'Jeco Auto IP Blacklist',    // Page title
+                'Jeco IP Blacklist',    // Page title
                 'Jeco Blacklist',            // Menu title
                 'manage_options',            // Capability required
                 'jeco-auto-ip-blacklist',    // Menu slug
@@ -167,7 +167,7 @@ if (!class_exists('JECO_IPBL')) {
             $cron_hour = get_option('jeco_ipbl_cron_hour', '00:00');
 
             echo '<div class="wrap">';
-            echo '<h1>Jeco Auto IP Blacklist</h1>';
+            echo '<h1>Jeco IP Blacklist</h1>';
             echo '<form method="POST" action="">';
             wp_nonce_field('jeco_ipbl_settings_save');
             echo '<table class="form-table">';
