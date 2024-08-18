@@ -37,7 +37,7 @@ if (! class_exists('JECO_IPBL')) {
             // Define constants.
             $this->define('JECO_IPBL', true);
             $this->define('JECO_IPBL_NAME', "JECO_IP_BLACKLIST");
-            $this->define('JECO_IPBL', $this->version);
+            $this->define('JECO_IPBL_VERSION', $this->version);
 
             // Hook to register cron job on plugin activation
             function wpcron_activation()
