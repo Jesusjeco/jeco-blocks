@@ -72,8 +72,13 @@ if (!class_exists('JECO_IPBL')) {
          */
         public function wpcron_activation()
         {
+            // Get the user-defined cron hour, default to 00:00 if not set
+            $cron_hour = get_option('jeco_ipbl_cron_hour', '00:00');
+            $timestamp = strtotime($cron_hour);
+
             if (!wp_next_scheduled('jeco_ipbl_script')) {
-                wp_schedule_event(time(), 'daily', 'jeco_ipbl_script');
+                // Schedule the event using the user-defined hour
+                wp_schedule_event($timestamp, 'daily', 'jeco_ipbl_script');
             }
         }
 
@@ -143,9 +148,36 @@ if (!class_exists('JECO_IPBL')) {
                 wp_die(__('You do not have sufficient permissions to access this page.'));
             }
 
-            // Display the settings page content
+            if (isset($_POST['submit'])) {
+                check_admin_referer('jeco_ipbl_settings_save'); // Security check
+                $cron_hour = sanitize_text_field($_POST['jeco_ipbl_cron_hour']);
+                update_option('jeco_ipbl_cron_hour', $cron_hour);
+
+                // Clear the existing cron job
+                $timestamp = wp_next_scheduled('jeco_ipbl_script');
+                wp_unschedule_event($timestamp, 'jeco_ipbl_script');
+
+                // Reschedule the cron job with the updated hour
+                $new_timestamp = strtotime($cron_hour);
+                wp_schedule_event($new_timestamp, 'daily', 'jeco_ipbl_script');
+
+                echo '<div class="updated"><p>Settings saved and cron job updated successfully.</p></div>';
+            }
+
+            $cron_hour = get_option('jeco_ipbl_cron_hour', '00:00');
+
             echo '<div class="wrap">';
             echo '<h1>Jeco Auto IP Blacklist</h1>';
+            echo '<form method="POST" action="">';
+            wp_nonce_field('jeco_ipbl_settings_save');
+            echo '<table class="form-table">';
+            echo '<tr>';
+            echo '<th scope="row"><label for="jeco_ipbl_cron_hour">Cron Job Start Time (HH:MM)</label></th>';
+            echo '<td><input type="time" id="jeco_ipbl_cron_hour" name="jeco_ipbl_cron_hour" value="' . esc_attr($cron_hour) . '" /></td>';
+            echo '</tr>';
+            echo '</table>';
+            echo '<p class="submit"><input type="submit" name="submit" class="button-primary" value="Save Changes"></p>';
+            echo '</form>';
             echo '</div>';
         }
 
