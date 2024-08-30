@@ -32,21 +32,23 @@
             @media (min-width: 1049px) {
               justify-content: start;
             }
-          }
+          } 
         }
       }
     }
 
     .logo {
-      grid-row-start: 1;
       background-color: white;
+      grid-row-start: 1;
+      display: flex;
+      align-items: center;
 
       @media (min-width: 1049px) {
         grid-column-start: 2;
       }
 
       img {
-        display: block; 
+        display: block;
         width: 100%;
         max-width: 450px;
         margin: 0 auto;
