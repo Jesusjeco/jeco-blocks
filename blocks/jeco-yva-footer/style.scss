@@ -1,0 +1,51 @@
+.jeco-yva-footer {
+  .wrapper-full {
+    display: grid;
+
+    @media (min-width: 1049px) {
+      grid-template-columns: 4fr 2fr;
+    }
+
+    .left {
+      text-align: center;
+      padding: 1.5rem;
+      display: grid;
+      gap: 20px;
+
+      @media (min-width: 1049px) {
+        text-align: left;
+        gap: 15px;
+      }
+
+      .column2 {
+        p {
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+
+            @media (min-width: 1049px) {
+              justify-content: start;
+            }
+          }
+        }
+      }
+    }
+
+    .logo {
+      grid-row-start: 1;
+      background-color: white;
+
+      @media (min-width: 1049px) {
+        grid-column-start: 2;
+      }
+
+      img {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+      }
+    }
+  }
+}

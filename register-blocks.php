@@ -24,6 +24,21 @@ function jeco_register_acf_blocks()
         'align' => true,
       ),
     ]);
+
+    //Blocks for YourVetAcademi.com
+    // Register the hello-world block
+    acf_register_block_type([
+      'name'              => 'jeco-yva-footer',
+      'title'             => __('JECO YVA Footer'),
+      'description'       => __('Footer for YourVetAcademy'),
+      'render_template'   => plugin_dir_path(__FILE__) . 'blocks/jeco-yva-footer/render.php',
+      'category'          => 'formatting',
+      'icon'              => 'admin-site-alt3',
+      'keywords'          => array('jeco', 'yva','footer'),
+      'supports'          => array(
+        'align' => true,
+      ),
+    ]);
   } else {
     error_log('ACF function acf_register_block_type does not exist.');
   }
