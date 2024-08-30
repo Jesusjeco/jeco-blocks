@@ -12,6 +12,9 @@
   display: grid;
   gap: 20px;
 }
+.jeco-yva-footer .wrapper-full .left * {
+  margin: 0;
+}
 @media (min-width: 1049px) {
   .jeco-yva-footer .wrapper-full .left {
     text-align: left;
@@ -39,6 +42,7 @@
   }
 }
 .jeco-yva-footer .wrapper-full .logo img {
+  display: block;
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
