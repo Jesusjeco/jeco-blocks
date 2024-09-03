@@ -20,7 +20,7 @@ function jeco_register_acf_blocks()
       'name'              => 'hello-world',
       'title'             => __('Hello World'),
       'description'       => __('A custom block for displaying a Hello World message.'),
-      'render_template'   => plugin_dir_path(__FILE__) . 'blocks/hello-world/render.php',
+      'render_template'   => JECO_BLOCKS_ROOT_PATH . 'blocks/hello-world/render.php',
       'category'          => 'formatting',
       'icon'              => 'admin-site-alt3',
       'keywords'          => array('hello', 'world'),
@@ -28,7 +28,6 @@ function jeco_register_acf_blocks()
         'align' => true,
       ),
     ]);
-
   } else {
     error_log('ACF function acf_register_block_type does not exist.');
   }
