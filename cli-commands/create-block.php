@@ -20,6 +20,11 @@ class Create_Block_Command
       mkdir(JECO_BLOCKS_ROOT_PATH . "blocks/$block_name", 0755, true);
     }
 
+    /**
+     * 
+     *  Everything related to the render.php file starting here. 
+     * */
+
     // Use the template to generate the render.php file
     $template_path = JECO_BLOCKS_ROOT_PATH . 'templates/render.php';
     if (file_exists($template_path)) {
@@ -36,20 +41,12 @@ class Create_Block_Command
       return;
     }
 
-    $template_for_style = <<<CODE
-        /* Styles for $block_name block */
-        .$block_name{}
-        CODE;
-    // Create an empty style.scss file
-    file_put_contents(JECO_BLOCKS_ROOT_PATH . $style_file, $template_for_style);
-
-    // Read the current register-blocks.php file
+    // Read the register-blocks.php file
     $register_file = JECO_BLOCKS_INC_PATH . 'register-blocks.php';
     if (!file_exists($register_file) || !is_writable($register_file)) {
       WP_CLI::error("register-blocks.php file not found or not writable at $register_file");
       return;
     }
-
     $register_content = file_get_contents($register_file);
 
     // Create the block registration code
@@ -78,6 +75,48 @@ class Create_Block_Command
 
     // Output a success message
     WP_CLI::success("Block $block_name has been created and registered.");
+
+
+    /**
+     * 
+     * Everything related to the style.scss file starting from here
+     * 
+     */
+
+    //Creating style.scss with a basic template
+    $template_for_style = <<<CODE
+    /* Styles for $block_name block */
+    .$block_name{}
+    CODE;
+    // Create an empty style.scss file
+    file_put_contents(JECO_BLOCKS_ROOT_PATH . $style_file, $template_for_style);
+
+    // Read the register-styles.php file
+    $register_file = JECO_BLOCKS_INC_PATH . 'register-styles.php';
+    if (!file_exists($register_file) || !is_writable($register_file)) {
+      WP_CLI::error("register-styles.php file not found or not writable at $register_file");
+      return;
+    }
+    $register_content = file_get_contents($register_file);
+
+    // Create the style registration code
+    $style_registration_code = <<<CODE
+      //Registering the $block_name styles
+        if (has_block('acf/$block_name')) {
+        wp_enqueue_style('$block_name-block', JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/style.css');
+      }\n
+    CODE;
+
+    // Insert the block registration code at line 17
+    $lines = explode("\n", $register_content);
+    array_splice($lines, 17, 0, $style_registration_code);
+    $updated_content = implode("\n", $lines);
+
+    // Write the updated content back to the register-blocks.php file
+    file_put_contents($register_file, $updated_content);
+
+    // Output a success message
+    WP_CLI::success("Block $block_name style has been registered.");
   }
 }
 
