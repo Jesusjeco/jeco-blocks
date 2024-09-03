@@ -1,4 +1,8 @@
 <?php
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+  exit;
+}
 
 class Create_Block_Command
 {
