@@ -36,6 +36,7 @@ if (!class_exists('JECO_BLOCKS')) {
         {
             // Define constants for the plugin
             $this->define('JECO_BLOCKS_VERSION', $this->version);
+            $this->define('JECO_BLOCKS_ROOT_URL', plugin_dir_url(__FILE__));
             $this->define('JECO_BLOCKS_ROOT_PATH', plugin_dir_path(__FILE__));
             $this->define('JECO_BLOCKS_INC_PATH', plugin_dir_path(__FILE__) . "inc/");
 

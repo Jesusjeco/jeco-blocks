@@ -1,6 +1,7 @@
 <?php
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
+  var_dump("Function used");
   exit;
 }
 
@@ -15,8 +16,7 @@ if (!defined('ABSPATH')) {
 function jeco_enqueue_conditional_block_styles()
 {
   if (has_block('acf/hello-world')) {
-    wp_enqueue_style('hello-world-block', plugin_dir_url(__FILE__) . 'blocks/hello-world/style.css');
+    wp_enqueue_style('hello-world-block', JECO_BLOCKS_ROOT_URL . 'blocks/hello-world/style.css');
   }
-
 }
 add_action('wp_enqueue_scripts', 'jeco_enqueue_conditional_block_styles');
