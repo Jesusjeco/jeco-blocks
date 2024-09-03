@@ -14,12 +14,14 @@ Jeco Blocks is a WordPress plugin designed to add custom blocks to your website.
 - Custom Gutenberg blocks.
 - Conditional loading of block styles.
 - Easy integration with ACF fields.
+- Command-line interface for creating new blocks.
 
 ## Requirements
 
 - WordPress 5.0 or higher
 - PHP 7.0 or higher
 - [Advanced Custom Fields (ACF) Plugin](https://wordpress.org/plugins/advanced-custom-fields/) (required)
+- [WP-CLI](https://wp-cli.org/) (for block creation command)
 
 ## Installation
 
@@ -39,15 +41,31 @@ Custom blocks are registered in the `register-blocks.php` file. An example block
 
 Block-specific styles are conditionally enqueued based on whether the block is present on the page. This ensures that only necessary CSS is loaded, optimizing page performance.
 
+### Creating a New Block
+
+You can create a new block using the WP-CLI command:
+
+```bash
+wp create_block [block_name]
+```
+
+Replace [block_name] with the desired name of your block. Spaces in the block name will be replaced with hyphens. The command will:
+
+ - Create a new folder for the block.
+ - Generate a render.php file using a template.
+ - Create a style.scss file.
+ - Register the new block in the register-blocks.php file.
+
 ## Frequently Asked Questions
 
 ### Why isn't my block showing up?
 
-Ensure that the ACF plugin is installed and activated. This plugin relies on ACF to register custom blocks.
+Ensure that the ACF plugin is installed and activated. This plugin relies on ACF to register custom blocks. Also, make sure to clear any cache if you don't see changes immediately.
 
 ### How can I add more blocks?
 
-You can add more blocks by editing the `register-blocks.php` file. Follow the pattern used for the "Hello World" block.
+ - You can add more blocks by editing the `register-blocks.php` file. Follow the pattern used for the "Hello World" block.
+ - OR You can add more blocks by using the WP-CLI command provided above. This will automatically set up the necessary files and update the registration file for you.
 
 ## Changelog
 
