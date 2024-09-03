@@ -36,6 +36,8 @@ if (!class_exists('JECO_BLOCKS')) {
         {
             // Define constants for the plugin
             $this->define('JECO_BLOCKS_VERSION', $this->version);
+            $this->define('JECO_BLOCKS_ROOT_PATH', plugin_dir_path(__FILE__));
+            $this->define('JECO_BLOCKS_INC_PATH', plugin_dir_path(__FILE__) . "inc/");
 
             // Check for ACF and include necessary files
             if (class_exists('ACF')) {
@@ -53,8 +55,9 @@ if (!class_exists('JECO_BLOCKS')) {
          */
         public function include_files()
         {
-            require_once(plugin_dir_path(__FILE__) . 'register-blocks.php');
-            require_once(plugin_dir_path(__FILE__) . 'register-styles.php');
+            require_once plugin_dir_path(__FILE__) . 'inc/register-blocks.php';
+            require_once plugin_dir_path(__FILE__) . 'inc/register-styles.php';
+            require_once plugin_dir_path(__FILE__) . 'cli-commands/create-block.php';
         }
 
         /**
