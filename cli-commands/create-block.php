@@ -11,6 +11,9 @@ class Create_Block_Command
     // Get the block name from the command arguments
     $block_name = sanitize_title_with_dashes($args[0]);
 
+    // Replace underscores with hyphens in the block name
+    $block_name = str_replace('_', '-', $block_name);
+
     // Paths for the new block's render template and style
     $render_template = "blocks/$block_name/render.php";
     $style_file = "blocks/$block_name/style.scss";
