@@ -11,12 +11,15 @@ class Create_Block_Command
     $block_name = $this->sanitizeBlockName($args[0]);
     $render_template = "blocks/$block_name/render.php";
     $style_file = "blocks/$block_name/style.scss";
+    $style_editor_file = "blocks/$block_name/editor-style.scss";
 
     $this->createBlockFolder($block_name);
     $this->createRenderFile($block_name, $render_template);
     $this->registerBlock($block_name, $render_template);
     $this->createStyleFile($block_name, $style_file);
     $this->registerStyle($block_name);
+    $this->createStyleFile($block_name, $style_editor_file);
+    $this->registerEditorStyle($block_name);
   }
 
   private function sanitizeBlockName($name)
@@ -113,14 +116,51 @@ class Create_Block_Command
     WP_CLI::success("Block $block_name style has been registered.");
   }
 
+  private function registerEditorStyle($block_name)
+  {
+    $register_file = JECO_BLOCKS_INC_PATH . 'register-editor-styles.php';
+    if (!file_exists($register_file) || !is_writable($register_file)) {
+      WP_CLI::error("register-editor-styles.php file not found or not writable at $register_file");
+      return;
+    }
+
+    $register_content = file_get_contents($register_file);
+    $style_registration_code = $this->generateEditorStyleRegistrationCode($block_name);
+    $updated_content = $this->insertCodeAtLine($register_content, $style_registration_code, 17);
+
+    // Write the updated content back to the register-styles.php file
+    file_put_contents($register_file, $updated_content);
+    WP_CLI::success("Block $block_name editor style has been registered.");
+  }
+
   private function generateStyleRegistrationCode($block_name)
   {
     return <<<CODE
         // Registering the $block_name styles
         if (has_block('acf/$block_name')) {
-            wp_enqueue_style('$block_name-block', JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/style.css');
+            wp_enqueue_style(
+              '$block_name-block',
+              JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/style.css',
+              array(),
+              filemtime(JECO_BLOCKS_ROOT_PATH . 'blocks/jeco-introduction-block/style.css')
+            );
         }\n
         CODE;
+  }
+
+  private function generateEditorStyleRegistrationCode($block_name)
+  {
+    return <<<CODE
+      // Enqueue styles for the editor for $block_name
+      if (has_block('acf/$block_name')) {
+        wp_enqueue_style(
+          '$block_name-editor-style',
+          JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/editor-style.css',
+          array(),
+          filemtime(JECO_BLOCKS_ROOT_PATH . 'blocks/$block_name/editor-style.css')
+        );
+      }
+    CODE;
   }
 
   private function insertCodeAtLine($content, $code, $line)
