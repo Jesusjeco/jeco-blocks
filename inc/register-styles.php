@@ -1,7 +1,6 @@
 <?php
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
-  var_dump("Function used");
   exit;
 }
 
