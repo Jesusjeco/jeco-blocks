@@ -58,6 +58,7 @@ if (!class_exists('JECO_BLOCKS')) {
         {
             require_once plugin_dir_path(__FILE__) . 'inc/register-blocks.php';
             require_once plugin_dir_path(__FILE__) . 'inc/register-styles.php';
+            require_once plugin_dir_path(__FILE__) . 'inc/register-editor-styles.php';
             require_once plugin_dir_path(__FILE__) . 'cli-commands/create-block.php';
         }
 
