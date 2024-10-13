@@ -12,8 +12,8 @@ if (!defined('ABSPATH')) {
  * 
  * @return void
  */
-function jeco_enqueue_conditional_block_styles()
+function jeco_enqueue_block_editor_styles()
 {
 
 }
-add_action('wp_enqueue_scripts', 'jeco_enqueue_conditional_block_styles');
+add_action('enqueue_block_editor_assets', 'jeco_enqueue_block_editor_styles');
