@@ -93,6 +93,7 @@ class Create_Block_Command
   {
     $template_for_style = <<<CODE
         /* Styles for $block_name block */
+        @use "../../scss/breakpoints";
         .$block_name {}
         CODE;
     // Create an empty style.scss file
