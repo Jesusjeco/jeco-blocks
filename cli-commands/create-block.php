@@ -142,8 +142,7 @@ class Create_Block_Command
             wp_enqueue_style(
               '$block_name-block',
               JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/style.css',
-              array(),
-              filemtime(JECO_BLOCKS_ROOT_PATH . 'blocks/jeco-introduction-block/style.css')
+              array()
             );
         }\n
         CODE;
@@ -157,8 +156,7 @@ class Create_Block_Command
         wp_enqueue_style(
           '$block_name-editor-style',
           JECO_BLOCKS_ROOT_URL . 'blocks/$block_name/editor-style.css',
-          array(),
-          filemtime(JECO_BLOCKS_ROOT_PATH . 'blocks/$block_name/editor-style.css')
+          array()
         );
       }
     CODE;
