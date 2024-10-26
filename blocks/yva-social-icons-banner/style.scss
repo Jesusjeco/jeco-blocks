@@ -31,9 +31,11 @@
     grid-template-columns: repeat(3, 1fr);
 
     .icon {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain; 
+      }
     }
   }
 }
