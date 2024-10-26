@@ -1,3 +1,39 @@
 /* Styles for yva-social-icons-banner block */
 @use "../../scss/breakpoints";
-.yva-social-icons-banner { }
+
+.yva-social-icons-banner {
+  background-color: rgba(157, 157, 157, .2);
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+  justify-items: stretch;
+  padding: 20px;
+
+  @include breakpoints.for-bp('tablet-md') {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .title {
+    text-align: center;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+
+    @include breakpoints.for-bp('tablet-md') {
+      font-size: 1.75rem;
+    }
+  }
+
+  .icons {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+}
