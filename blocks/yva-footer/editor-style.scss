@@ -20,6 +20,10 @@
     display: grid;
     gap: 1.5rem;
 
+    p {
+      margin: 0;
+    }
+
     @include breakpoints.for-bp('tablet-sm') {
       grid-template-columns: 1fr 1fr;
     }
