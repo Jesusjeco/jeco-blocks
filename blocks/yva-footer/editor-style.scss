@@ -16,7 +16,7 @@
   }
 
   .data {
-    padding: 1.5rem;
+    padding: .5rem 1.5rem;
     display: grid;
     gap: 1.5rem;
 
@@ -52,11 +52,11 @@
     img {
       display: block;
       width: 100%;
-      max-width: 450px;
+      max-width: 400px;
       margin: 0 auto;
 
       @include breakpoints.for-bp('tablet-md') {
-        height: 120px;
+        height: 100px;
         object-fit: contain;
       }
     }

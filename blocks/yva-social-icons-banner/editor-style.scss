@@ -17,24 +17,18 @@
     text-align: center;
     padding-bottom: 1rem;
     font-size: 1.2rem;
-
-    @include breakpoints.for-bp('tablet-md') {
-      font-size: 1.75rem;
-    }
   }
 
   .icons {
-    display: grid;
-    gap: 1rem;
-    justify-items: center;
+    display: flex;
+    gap: 1.5rem;
     justify-content: center;
-    grid-template-columns: repeat(3, 1fr);
 
     .icon {
       img {
         width: 40px;
         height: 40px;
-        object-fit: contain; 
+        object-fit: contain;
       }
     }
   }
