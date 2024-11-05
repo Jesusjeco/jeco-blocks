@@ -33,6 +33,15 @@ Jeco Blocks is a WordPress plugin designed to add custom blocks to your website.
 
 Once the plugin is activated, you can use the custom blocks provided by the plugin in the WordPress block editor. Styles for the blocks will be conditionally loaded based on their usage.
 
+## Query Usage
+
+Yes, there is a query functionality within the plugin that you can use.
+The Class is already registered so you only need to call it by $jeco_custom_posts_query = Jeco_Query_Manager::get_custom_query($args);
+Of course that is just an example. The name of the variable is up to you. Once you have the query, feel free to place it within a loop and go ahead.
+
+Of course, there are tons of query parameters. As developers that we are, feel free to take a look at the main file, located in inc/jeco-query-manager.php
+Have fun
+
 ### Registering a Block
 
 Custom blocks are registered in the `register-blocks.php` file. An example block is the "Hello World" block, which displays a simple "Hello World" message.
