@@ -7,6 +7,9 @@ class Jeco_Query_Manager {
      *
      * @param array $args Optional. Array of query arguments.
      * @return WP_Query The generated WP_Query instance.
+     * 
+     * Use: if you want you canc reate an instance, but you can just use the class directly and save the quesy in a variable.
+     * Such as $jeco_custom_query = Jeco_Query_Manager::get_custom_query($args); 
      */
     public static function get_custom_query($args = []) {
         $defaults = [
