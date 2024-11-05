@@ -7,9 +7,9 @@ class Jeco_Query_Manager {
      *
      * @param array $args Optional. Array of query arguments.
      * @return WP_Query The generated WP_Query instance.
-     * 
-     * Use: if you want you canc reate an instance, but you can just use the class directly and save the quesy in a variable.
-     * Such as $jeco_custom_query = Jeco_Query_Manager::get_custom_query($args); 
+     *
+     * Usage: You can create an instance or use the class directly and store the query in a variable.
+     * For example: $jeco_custom_query = Jeco_Query_Manager::get_custom_query($args); 
      */
     public static function get_custom_query($args = []) {
         $defaults = [
@@ -30,7 +30,7 @@ class Jeco_Query_Manager {
 
         // Sanitize inputs
         $post_type = sanitize_text_field($args['post_types']);
-        $cat = is_array($args['post_categories']) ? array_map('intval', $args['post_categories']) : $args['post_categories'];
+        $categories = is_array($args['post_categories']) ? array_map('intval', $args['post_categories']) : (array) $args['post_categories'];
         $posts_per_page = intval($args['posts_per_page']) > 0 ? intval($args['posts_per_page']) : -1;
         $orderby = sanitize_text_field($args['orderby']);
         $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
@@ -39,7 +39,7 @@ class Jeco_Query_Manager {
         $query_args = [
             'post_type'      => $post_type,
             'posts_per_page' => $posts_per_page,
-            'cat'            => $cat,
+            'category__in'   => $categories,  // Using category__in for multiple categories
             'offset'         => intval($args['offset']),
             'post_status'    => 'publish',
             'orderby'        => $orderby,
@@ -49,7 +49,7 @@ class Jeco_Query_Manager {
             'date_query'     => $args['date_query'],
         ];
 
-        // Optionally exclude current post
+        // Optionally exclude the current post if on a single post view
         if (!empty($args['exclude_current']) && is_single()) {
             $query_args['post__not_in'] = [get_the_ID()];
         }
